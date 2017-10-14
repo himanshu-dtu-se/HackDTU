@@ -38,6 +38,17 @@ public class ArticleModel {
         this.unique_id = unique_id;
     }
 
+    public ArticleModel(String author, String title, String description, String urlToImage, String publishedAt) {
+        this.author = author;
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        this.urlToImage = urlToImage;
+        this.publishedAt = publishedAt;
+        this.unique_id = unique_id;
+    }
+
+
     public String getAuthor() {
         return author;
     }

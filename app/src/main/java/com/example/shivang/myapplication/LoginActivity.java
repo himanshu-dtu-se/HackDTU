@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         if(mAuth.getCurrentUser()!=null){
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+            finish();
             startActivity(intent);
         }
 
@@ -75,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                            finish();
                             startActivity(intent);
 
                             Toast.makeText(getApplicationContext(),"Logged In Successfully", Toast.LENGTH_SHORT).show();
@@ -114,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    finish();
                     startActivity(intent);
 
                 }else{

@@ -14,8 +14,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <EditText
+            android:padding="5dp"
+            android:background="@drawable/edittext"
             android:id="@+id/login_email"
             android:layout_width="match_parent"
+            android:drawableLeft="@drawable/ic_email"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:inputType="textEmailAddress"
@@ -26,9 +29,12 @@
             />
 
         <EditText
+            android:padding="5dp"
+            android:background="@drawable/edittext"
             android:id="@+id/login_pass"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
+            android:drawableLeft="@drawable/ic_pass"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:inputType="textPassword"

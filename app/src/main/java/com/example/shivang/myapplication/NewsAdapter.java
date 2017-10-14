@@ -42,7 +42,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
         holder.desc.setText(mArticles.get(position).getDescription().substring(0,100).concat(" ......"));
         Picasso
                 .with(mContext)
-                .load(mArticles.get(0).getUrlToImage())
+                .load(mArticles.get(position).getUrlToImage())
                 .into(holder.poster);
         holder.mNewsCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +56,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
                 bundle.putSerializable("description",mArticles.get(position).getDescription());
                 bundle.putSerializable("urlToImage",mArticles.get(position).getUrlToImage());
                 bundle.putSerializable("publishedAt",mArticles.get(position).getPublishedAt());
+                bundle.putSerializable("unique_id",mArticles.get(position).getUnique_id());
 
                 intent.putExtras(bundle);
 
