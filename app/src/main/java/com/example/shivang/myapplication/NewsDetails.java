@@ -2,13 +2,18 @@ package com.example.shivang.myapplication;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class NewsDetails extends AppCompatActivity {
-
 
 
     @Override
@@ -17,6 +22,7 @@ public class NewsDetails extends AppCompatActivity {
         setContentView(R.layout.activity_news_details);
 
         String author="", title="", desc="", publish="", imgURL="";
+
 
         Bundle bundle = getIntent().getExtras();
 
@@ -41,5 +47,32 @@ public class NewsDetails extends AppCompatActivity {
 
         TextView tv_publish = (TextView)findViewById(R.id.details_publishdate);
         tv_publish.setText(publish.substring(0,10));
+
+
+
+        Button button = (Button)findViewById(R.id.submit);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                handle_fake_reg();
+
+            }
+        });
+    }
+
+    private void handle_fake_reg() {
+
+        FirebaseDatabase mDatabase;
+        DatabaseReference mRef;
+
+        FirebaseAuth mAuth;
+        FirebaseUser mUser;
+
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+
+        mDatabase = FirebaseDatabase.getInstance();
+
     }
 }

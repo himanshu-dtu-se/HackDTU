@@ -22,6 +22,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,14 +41,21 @@ public class AllNewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.all_news, container, false);
+        View view=  inflater.inflate(R.layout.all_news, container, false);
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        getActivity().setTitle("Latest News");
+
         mRecycler = view.findViewById(R.id.recycler_view);
-        mRecycler.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity().getApplicationContext());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecycler.setLayoutManager(llm);
         mRecycler.setHasFixedSize(true);
+        mRecycler.setAdapter(new NewsAdapter(getContext(),new ArrayList<ArticleModel>()));
 
         load_data();
 
@@ -62,7 +71,7 @@ public class AllNewsFragment extends Fragment {
         dialog.show();
 
         StringRequest request = new StringRequest(
-                Request.Method.GET, "https://newsapi.org/v1/ArticleModel?source=the-next-web&sortBy=latest&apiKey=3e3cef2db4ed40b681d3e968392f4b49"
+                Request.Method.GET, "https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=3ed192c762e940699dd22123cfd224ff"
                 ,
                 new Response.Listener<String>() {
                     @Override
@@ -73,21 +82,29 @@ public class AllNewsFragment extends Fragment {
                         try {
                             JSONObject jsonObject= new JSONObject(response);
 
-                            JSONArray array = jsonObject.getJSONArray("ArticleModel");
+                            JSONArray array = jsonObject.getJSONArray("articles");
 
                             for (int i=0; i<array.length(); i++){
                                 JSONObject item = array.getJSONObject(i);
-                                articlesList.add(new ArticleModel(
-                                        item.getString("author"),
-                                        item.getString("title"),
-                                        item.getString("description"),
-                                        item.getString("url"),
-                                        item.getString("urlToImage"),
-                                        item.getString("publishedAt")
-                                ));
+                                try {
+                                    articlesList.add(new ArticleModel(
+                                            item.getString("author"),
+                                            item.getString("title"),
+                                            item.getString("description"),
+                                            item.getString("url"),
+                                            item.getString("urlToImage"),
+                                            item.getString("publishedAt"),
+                                            AeSimpleSHA1.SHA1(item.getString("title"))
+                                    ));
+                                } catch (NoSuchAlgorithmException e) {
+                                   e.printStackTrace();
+                               } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
                             }
 
-                            newsAdapter1 = new NewsAdapter(getActivity().getApplicationContext(), articlesList);
+                            newsAdapter1 = new NewsAdapter(getContext() , articlesList);
+
                             mRecycler.setAdapter(newsAdapter1);
 
                         } catch (JSONException e) {
