@@ -72,6 +72,7 @@
                     android:layout_marginTop="10dp">
 
                     <Button
+                        android:id="@+id/ac_positive"
                         android:padding="5dp"
                         android:drawableLeft="@drawable/ic_thumb_up"
                         android:layout_width="0dp"
@@ -85,6 +86,7 @@
                         android:layout_height="wrap_content" />
 
                     <Button
+                        android:id="@+id/ic_negetive"
                         android:padding="5dp"
                         android:background="#ff003f"
                         android:layout_marginLeft="5dp"

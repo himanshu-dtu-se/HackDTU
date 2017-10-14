@@ -11,10 +11,23 @@ public class ArticleModel {
     String description;
     String url;
     String urlToImage;
+
+    public ArticleModel(String author, String title, String description, String urlToImage, String publishedAt, String unique_id) {
+        this.author = author;
+        this.title = title;
+        this.description = description;
+        this.urlToImage = urlToImage;
+        this.publishedAt = publishedAt;
+        this.unique_id = unique_id;
+    }
+
     String publishedAt;
 
     boolean is_fake;
     String unique_id;
+
+    public ArticleModel() {
+    }
 
     public boolean is_fake() {
         return is_fake;
@@ -42,10 +55,8 @@ public class ArticleModel {
         this.author = author;
         this.title = title;
         this.description = description;
-        this.url = url;
         this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
-        this.unique_id = unique_id;
     }
 
 
